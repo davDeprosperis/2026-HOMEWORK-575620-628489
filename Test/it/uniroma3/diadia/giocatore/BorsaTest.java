@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
  * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see Borsa
- * @version 2.0
+ * @version 3.0
  */
 
 class BorsaTest {
@@ -75,5 +75,12 @@ class BorsaTest {
 	void testProvaAdAggiungereUnOggettoTroppoPesante() {
 		assertFalse(this.borsaVuota.addAttrezzo(new Attrezzo("peso", 3)));
 	}
+	@Test
+	void testGetSortedSetOrdinatoPerPeso_StessoPeso() {
+		assertEquals(2, this.borsaPiena.getSortedSetOrdinatoPerPeso().size());
+		assertEquals(this.martello, this.borsaPiena.getSortedSetOrdinatoPerPeso().first());
+	}
+	
+	
 
 }

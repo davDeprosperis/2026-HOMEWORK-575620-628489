@@ -8,7 +8,7 @@ package it.uniroma3.diadia.ambienti;
  * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see Stanza
- * @version 2.0
+ * @version 3.0
  */
 public class StanzaBuia extends Stanza {
 

@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import static it.uniroma3.diadia.Direzione.*;
 
 /***
  * Questa classe ha la responsabilita' di creare e gestire la mappa del gioco
@@ -9,7 +10,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see Stanza
- * @version 2.0
+ * @see Direzione
+ * @version 3.0
  */
 
 public class Labirinto {
@@ -42,18 +44,18 @@ public class Labirinto {
 		Stanza biblioteca = new Stanza("Biblioteca");
 
 		/* collega le stanze */
-		atrio.impostaStanzaAdiacente("nord", biblioteca);
-		atrio.impostaStanzaAdiacente("est", aulaN11);
-		atrio.impostaStanzaAdiacente("sud", aulaN10);
-		atrio.impostaStanzaAdiacente("ovest", laboratorio);
-		aulaN11.impostaStanzaAdiacente("est", laboratorio);
-		aulaN11.impostaStanzaAdiacente("ovest", atrio);
-		aulaN10.impostaStanzaAdiacente("nord", atrio);
-		aulaN10.impostaStanzaAdiacente("est", aulaN11);
-		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
-		laboratorio.impostaStanzaAdiacente("est", atrio);
-		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
-		biblioteca.impostaStanzaAdiacente("sud", atrio);
+		atrio.impostaStanzaAdiacente(NORD, biblioteca);
+		atrio.impostaStanzaAdiacente(EST, aulaN11);
+		atrio.impostaStanzaAdiacente(SUD, aulaN10);
+		atrio.impostaStanzaAdiacente(OVEST, laboratorio);
+		aulaN11.impostaStanzaAdiacente(EST, laboratorio);
+		aulaN11.impostaStanzaAdiacente(OVEST, atrio);
+		aulaN10.impostaStanzaAdiacente(NORD, atrio);
+		aulaN10.impostaStanzaAdiacente(EST, aulaN11);
+		aulaN10.impostaStanzaAdiacente(OVEST, laboratorio);
+		laboratorio.impostaStanzaAdiacente(EST, atrio);
+		laboratorio.impostaStanzaAdiacente(OVEST, aulaN11);
+		biblioteca.impostaStanzaAdiacente(SUD, atrio);
 
 		/* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);

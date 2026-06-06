@@ -1,17 +1,17 @@
 package it.uniroma3.diadia.ambienti;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static it.uniroma3.diadia.Direzione.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
  * Classe di testing per StanzaBloccata
- * 
- * @author Davide De Prosperis, Matricola: 575620
+ * * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see StanzaBloccata
- * @version 2.0
+ * @version 3.0
  */
 public class StanzaBloccataTest {
 
@@ -25,9 +25,9 @@ public class StanzaBloccataTest {
 	 */
 	@BeforeEach
 	public void setUp() {
-		this.stanza = new StanzaBloccata("Stanza Cassaforte", "nord", "passepartout");
+		this.stanza = new StanzaBloccata("Stanza Cassaforte", NORD, "passepartout");
 		this.stanzaAdiacente = new Stanza("Uscita");
-		this.stanza.impostaStanzaAdiacente("nord", this.stanzaAdiacente);
+		this.stanza.impostaStanzaAdiacente(NORD, this.stanzaAdiacente);
 		
 		this.passepartout = new Attrezzo("passepartout", 1);
 	}
@@ -38,7 +38,7 @@ public class StanzaBloccataTest {
 	 */
 	@Test
 	public void testGetStanzaAdiacenteDirezioneBloccata() {
-		assertEquals(this.stanza, this.stanza.getStanzaAdiacente("nord"));
+		assertEquals(this.stanza, this.stanza.getStanzaAdiacente(NORD));
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class StanzaBloccataTest {
 	@Test
 	public void testGetStanzaAdiacenteDirezioneSbloccata() {
 		this.stanza.addAttrezzo(this.passepartout);
-		assertEquals(this.stanzaAdiacente, this.stanza.getStanzaAdiacente("nord"));
+		assertEquals(this.stanzaAdiacente, this.stanza.getStanzaAdiacente(NORD));
 	}
 
 	/**

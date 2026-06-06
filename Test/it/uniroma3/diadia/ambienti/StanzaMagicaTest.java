@@ -3,18 +3,15 @@ package it.uniroma3.diadia.ambienti;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
-* Classe di testing
-* 
-* @author Davide De Prosperis, Matricola: 575620
-* @author Gabriele Crescenzi, Matricola: 628793
-* @see Stanza
-* @version 2.0
-*/
-
+ * Classe di testing per StanzaMagica
+ * * @author Davide De Prosperis, Matricola: 575620
+ * @author Gabriele Crescenzi, Matricola: 628793
+ * @see StanzaMagica
+ * @version 3.0
+ */
 public class StanzaMagicaTest {
 
 	private StanzaMagica stanza;
@@ -28,7 +25,7 @@ public class StanzaMagicaTest {
 	public void testAddAttrezzo_ComportamentoNormale_SottoSoglia() {
 		Attrezzo a1 = new Attrezzo("spada", 3);
 		
-		this.stanza.addAttrezzo(a1); // Contatore = 1 (nessuna magia)
+		this.stanza.addAttrezzo(a1); 
 		
 		assertTrue(this.stanza.hasAttrezzo("spada"));
 		assertEquals(3, this.stanza.getAttrezzo("spada").getPeso());
@@ -39,8 +36,8 @@ public class StanzaMagicaTest {
 		Attrezzo a1 = new Attrezzo("spada", 3);
 		Attrezzo a2 = new Attrezzo("scudo", 5);
 		
-		this.stanza.addAttrezzo(a1); // Contatore = 1 (nessuna magia)
-		this.stanza.addAttrezzo(a2); // Contatore = 2 (supera la soglia 1, scatta la magia)
+		this.stanza.addAttrezzo(a1); 
+		this.stanza.addAttrezzo(a2); 
 
 		assertFalse(this.stanza.hasAttrezzo("scudo"));
 		assertTrue(this.stanza.hasAttrezzo("oducs"));

@@ -7,20 +7,19 @@ import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 /**
-* Classe di testing
-* 
-* @author Davide De Prosperis, Matricola: 575620
-* @author Gabriele Crescenzi, Matricola: 628793
-* @see Stanza
-* @version 2.0
-*/
-
+ * Classe di testing per StanzaMagicaProtected
+ * * @author Davide De Prosperis, Matricola: 575620
+ * @author Gabriele Crescenzi, Matricola: 628793
+ * @see StanzaMagicaProtected
+ * @version 3.0
+ */
 public class StanzaMagicaProtectedTest {
 
 	private StanzaMagicaProtected stanza;
 
 	@BeforeEach
 	public void setUp() {
+		// Impostiamo la soglia a 1 per mantenere il test minimale
 		this.stanza = new StanzaMagicaProtected("StanzaMagicaProtectedTest", 1);
 	}
 

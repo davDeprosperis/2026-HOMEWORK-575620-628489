@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+//Ciao Leonardo Coloricchio
+
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
@@ -18,7 +20,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
  * @see IOConsole
  * @see Comando
  * 
- * @version 2.0
+ * @version 3.0
  */
 
 public class DiaDia {
@@ -63,15 +65,31 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false
 	 *         altrimenti
 	 */
+	/**
+	 * Processa una istruzione
+	 *
+	 * @return true se l'istruzione e' eseguita e il gioco continua, false
+	 * altrimenti
+	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
 		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
-		comandoDaEseguire = factory.costruisciComando(istruzione);
-		comandoDaEseguire.esegui(this.partita, this.io);
+		
+		try {
+			// Proviamo a costruire ed eseguire il comando
+			comandoDaEseguire = factory.costruisciComando(istruzione);
+			comandoDaEseguire.esegui(this.partita, this.io);
+		} catch (Exception e) {
+			// Se la fabbrica lancia un'eccezione, la catturiamo e avvisiamo l'utente
+			this.io.mostraMessaggio("Comando non valido o errore di esecuzione.");
+			return false; // Restituiamo false per far continuare il ciclo del gioco
+		}
+
 		if (this.partita.vinta())
 			this.io.mostraMessaggio("Hai vinto!");
 		if (this.partita.getGiocatore().getCfu() == 0)
 			this.io.mostraMessaggio("Hai esaurito i CFU...");
+            
 		return this.partita.isFinita();
 	}
 

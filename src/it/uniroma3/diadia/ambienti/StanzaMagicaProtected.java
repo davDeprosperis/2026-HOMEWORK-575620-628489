@@ -10,7 +10,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see StanzaProtected
  * @see Attrezzo
- * @version 2.0
+ * @version 3.0
  */
 
 public class StanzaMagicaProtected extends StanzaProtected {

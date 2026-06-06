@@ -1,6 +1,7 @@
 package it.uniroma3.diadia;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.giocatore.Giocatore; 
 
@@ -8,7 +9,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * Classe di Test di Accettazione per simulare partite intere.
  * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
- * @version 2.0
+ * @version 3.0
  */
 public class DiaDiaTest {
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see FabbricaDiComandiFisarmonica
- * @version 2.0
+ * @version 3.0
  */
 
 public class FabbricaDiComandiFisarmonicaTest {
@@ -24,21 +24,21 @@ public class FabbricaDiComandiFisarmonicaTest {
 	}
 
 	@Test
-	public void testCostruisciComando_SenzaParametro() {
+	public void testCostruisciComando_SenzaParametro() throws Exception {
 		Comando c = this.fabbrica.costruisciComando("aiuto");
 		assertEquals("aiuto", c.getNome());
 		assertNull(c.getParametro());
 	}
 
 	@Test
-	public void testCostruisciComando_ConParametro() {
+	public void testCostruisciComando_ConParametro() throws Exception{
 		Comando c = this.fabbrica.costruisciComando("vai nord");
 		assertEquals("vai", c.getNome());
 		assertEquals("nord", c.getParametro());
 	}
 
 	@Test
-	public void testCostruisciComando_NonValido() {
+	public void testCostruisciComando_NonValido() throws Exception{
 		Comando c = this.fabbrica.costruisciComando("corri");
 		assertEquals("non valido", c.getNome());
 	}

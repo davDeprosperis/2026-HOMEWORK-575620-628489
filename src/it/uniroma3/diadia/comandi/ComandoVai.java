@@ -1,8 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
-
-
+import it.uniroma3.diadia.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.IO;
 /**
@@ -15,10 +14,11 @@ import it.uniroma3.diadia.IO;
  * @see Partita
  * @see Stanza
  * @see IO
+ * @see Direzione
  */
 
 public class ComandoVai implements Comando {
-	private String direzione;
+	private String direzioneScrittaDaUtente;
 	
 
 	@Override
@@ -26,15 +26,22 @@ public class ComandoVai implements Comando {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = null;
 		
-		if(this.direzione == null) {
+		if(this.direzioneScrittaDaUtente == null) {
 			io.mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
 			return;
 		}
+		try {
+			prossimaStanza = stanzaCorrente.getStanzaAdiacente(Direzione.valueOf(this.direzioneScrittaDaUtente.toUpperCase()));
+						
+		}
+		catch(IllegalArgumentException e){
+			io.mostraMessaggio("Direzione inesistente! scegli tra 'nord','est','sud','ovest'.");
+			return;
+		}
 		
-		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.direzione);
 		if (prossimaStanza == null) {
-			io.mostraMessaggio("Direzione inesistente"); 
-			return;		
+		    io.mostraMessaggio("Di là c'è un muro! Non puoi andare in quella direzione."); 
+		    return;		
 		}
 		
 		partita.setStanzaCorrente(prossimaStanza);
@@ -44,7 +51,7 @@ public class ComandoVai implements Comando {
 	
 	@Override
 	public void setParametro(String parametro) {
-		this.direzione = parametro;
+		this.direzioneScrittaDaUtente = parametro;
 	}
 	
 	@Override
@@ -54,6 +61,6 @@ public class ComandoVai implements Comando {
 
 	@Override
 	public String getParametro() {
-		return this.direzione;
+		return this.direzioneScrittaDaUtente;
 	}
 }

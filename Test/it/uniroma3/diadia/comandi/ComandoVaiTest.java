@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +9,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.IO;
-
+import static it.uniroma3.diadia.Direzione.*;
 /**
  * Classe di testing per ComandoVai. *
  * 
@@ -33,7 +34,7 @@ public class ComandoVaiTest {
 		this.io = new IOSimulator(new String[0]);
 		this.atrio = new Stanza("Atrio");
 		this.biblioteca = new Stanza("Biblioteca");
-		this.atrio.impostaStanzaAdiacente("nord", this.biblioteca);
+		this.atrio.impostaStanzaAdiacente(NORD, this.biblioteca);
 		this.partita.setStanzaCorrente(this.atrio);
 		this.cfuIniziali = this.partita.getGiocatore().getCfu();
 	}
