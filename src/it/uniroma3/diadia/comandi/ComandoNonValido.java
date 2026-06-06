@@ -13,24 +13,14 @@ import it.uniroma3.diadia.IO;
  * @see Partita
  * @see IO
  */
-public class ComandoNonValido implements Comando {
+public class ComandoNonValido extends AbstractComando {
 
 	@Override
 	public void esegui(Partita partita, IO io) {
 		io.mostraMessaggio("Comando sconosciuto o non valido!");
 	}
-
-	@Override
-	public void setParametro(String parametro) {
-	}
-
-	@Override
 	public String getNome() {
 		return "non valido";
 	}
 
-	@Override
-	public String getParametro() {
-		return null;
-	}
 }

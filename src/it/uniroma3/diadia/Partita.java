@@ -33,6 +33,16 @@ public class Partita {
 		this.finita = false;
 		this.giocatore = new Giocatore();
 	}
+	public Partita(Labirinto labirinto) {
+	    this.labirinto = labirinto;
+	    this.stanzaCorrente = labirinto.getStanzaIniziale();
+	    this.finita = false;
+	    this.giocatore = new Giocatore();
+	}
+
+	public void setLabirinto(Labirinto labirinto) {
+	    this.labirinto = labirinto;
+	}
 
 	public void setStanzaCorrente(Stanza stanzaCorrente) {
 		this.stanzaCorrente = stanzaCorrente;

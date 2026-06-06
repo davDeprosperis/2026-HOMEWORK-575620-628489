@@ -73,5 +73,13 @@ public class Labirinto {
 	public Stanza getStanzaIniziale() {
 		return this.stanzaIniziale;
 	}
+	//aggiungo i metodi setter per far funzionare getLabirinto() in LabirintoBuilder
+	public void setStanzaVincente(Stanza stanza) {
+		this.stanzaVincente=stanza;
+	}
+	public void setStanzaIniziale(Stanza stanza) {
+		this.stanzaIniziale=stanza;
+	}
+	
 
 }

@@ -17,8 +17,8 @@ import it.uniroma3.diadia.IO;
  * @see Direzione
  */
 
-public class ComandoVai implements Comando {
-	private String direzioneScrittaDaUtente;
+public class ComandoVai extends AbstractComando {
+	
 	
 
 	@Override
@@ -26,12 +26,12 @@ public class ComandoVai implements Comando {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = null;
 		
-		if(this.direzioneScrittaDaUtente == null) {
+		if(this.getParametro() == null) {
 			io.mostraMessaggio("Dove vuoi andare? Devi specificare una direzione");
 			return;
 		}
 		try {
-			prossimaStanza = stanzaCorrente.getStanzaAdiacente(Direzione.valueOf(this.direzioneScrittaDaUtente.toUpperCase()));
+			prossimaStanza = stanzaCorrente.getStanzaAdiacente(Direzione.valueOf(this.getParametro().toUpperCase()));
 						
 		}
 		catch(IllegalArgumentException e){
@@ -48,19 +48,7 @@ public class ComandoVai implements Comando {
 		io.mostraMessaggio(partita.getStanzaCorrente().getNome());
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu() - 1);
 	}
-	
-	@Override
-	public void setParametro(String parametro) {
-		this.direzioneScrittaDaUtente = parametro;
-	}
-	
-	@Override
 	public String getNome() {
 		return "vai";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.direzioneScrittaDaUtente;
 	}
 }

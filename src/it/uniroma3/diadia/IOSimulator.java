@@ -1,5 +1,9 @@
 package it.uniroma3.diadia;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Classe IOSimulator - implementazione di IO per i test di accettazione. Simula
  * un utente iniettando comandi predefiniti tramite un array e memorizzando i
@@ -12,11 +16,9 @@ package it.uniroma3.diadia;
  */
 public class IOSimulator implements IO {
 
-	private String[] righeLette;
-	private int indiceLettura;
-
-	private String[] messaggiProdotti;
-	private int indiceMessaggi;
+	private LinkedList<String>righeLette;
+	private List<String>messaggiProdotti;
+	
 
 	/**
 	 * Costruisce un simulatore con un array di comandi da eseguire.
@@ -24,10 +26,12 @@ public class IOSimulator implements IO {
 	 * @param righeDaLeggere l'array dei comandi preimpostati
 	 */
 	public IOSimulator(String[] righeDaLeggere) {
-		this.righeLette = righeDaLeggere;
-		this.indiceLettura = 0;
-		this.messaggiProdotti = new String[100];
-		this.indiceMessaggi = 0;
+		this.righeLette = new LinkedList<String>();
+		for (String riga : righeDaLeggere) {
+		    this.righeLette.add(riga);
+		}
+		this.messaggiProdotti =new ArrayList<String>();
+			
 	}
 
 	/**
@@ -36,12 +40,10 @@ public class IOSimulator implements IO {
 
 	@Override
 	public String leggiRiga() {
-		if (this.indiceLettura < this.righeLette.length) {
-			String riga = this.righeLette[this.indiceLettura];
-			this.indiceLettura++;
-			return riga;
-		}
-		return null;
+	    if (!this.righeLette.isEmpty()) {
+	        return this.righeLette.removeFirst();
+	    }
+	    return null;
 	}
 
 	/**
@@ -50,10 +52,7 @@ public class IOSimulator implements IO {
 
 	@Override
 	public void mostraMessaggio(String messaggio) {
-		if (this.indiceMessaggi < this.messaggiProdotti.length) {
-			this.messaggiProdotti[this.indiceMessaggi] = messaggio;
-			this.indiceMessaggi++;
-		}
+	    this.messaggiProdotti.add(messaggio);
 	}
 
 	/**
@@ -65,11 +64,11 @@ public class IOSimulator implements IO {
 	 */
 
 	public boolean hasMessaggio(String messaggioDaCercare) {
-		for (int i = 0; i < this.indiceMessaggi; i++) {
-			if (this.messaggiProdotti[i].contains(messaggioDaCercare)) {
-				return true;
-			}
+	for(String messaggio:messaggiProdotti) {
+		if(messaggio.contains(messaggioDaCercare)) {
+			return true;
 		}
-		return false;
+	}
+	return false;
 	}
 }

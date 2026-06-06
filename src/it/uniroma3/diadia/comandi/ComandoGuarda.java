@@ -16,7 +16,7 @@ import it.uniroma3.diadia.IO;
  * @see Partita
  * @see IO
  */
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando {
 
 	/**
 	 * Stampa la descrizione della stanza corrente e le informazioni del giocatore.
@@ -31,17 +31,7 @@ public class ComandoGuarda implements Comando {
 		io.mostraMessaggio("Borsa: " + partita.getGiocatore().getBorsa().toString());
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-	}
-
-	@Override
 	public String getNome() {
 		return "guarda";
-	}
-
-	@Override
-	public String getParametro() {
-		return null;
 	}
 }

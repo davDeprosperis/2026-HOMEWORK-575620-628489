@@ -1,5 +1,6 @@
 package it.uniroma3.diadia;
-
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -51,5 +52,58 @@ public class DiaDiaTest {
 		gioco.gioca(); 
 		
 		assertTrue(io.hasMessaggio("Hai esaurito i CFU..."));
+	}
+	//test di simulazione per partite intere
+	@Test
+	public void testPartitaVintaConBuilder() {
+	    Labirinto l = new LabirintoBuilder()
+	        .addStanzaIniziale("salotto")
+	        .addStanzaVincente("camera")
+	        .addAdiacenza("salotto", "camera", "nord")
+	        .getLabirinto();
+	    String[] comandi = {"vai nord"};
+	    IOSimulator io = new IOSimulator(comandi);
+	    DiaDia gioco = new DiaDia(l, io);
+	    gioco.gioca();
+	    assertTrue(io.hasMessaggio("Hai vinto!"));
+	}
+
+	@Test
+	public void testPrendiAttrezzoEVinci() {
+	    Labirinto l = new LabirintoBuilder()
+	        .addStanzaIniziale("salotto")
+	        .addAttrezzo("chiave", 1)
+	        .addStanzaVincente("camera")
+	        .addAdiacenza("salotto", "camera", "nord")
+	        .getLabirinto();
+	    String[] comandi = {"prendi chiave", "vai nord"};
+	    IOSimulator io = new IOSimulator(comandi);
+	    DiaDia gioco = new DiaDia(l, io);
+	    gioco.gioca();
+	    assertTrue(io.hasMessaggio("Hai vinto!"));
+	}
+
+	@Test
+	public void testPartitaPersa() {
+	    Labirinto l = new LabirintoBuilder()
+	        .addStanzaIniziale("salotto")
+	        .addStanza("cucina")
+	        .addAdiacenza("salotto", "cucina", "est")
+	        .addAdiacenza("cucina","salotto","ovest")
+	        .addStanzaVincente("camera")
+	        .getLabirinto();
+	    int cfu = Giocatore.CFU_INIZIALI;
+	    String[] comandi = new String[cfu];
+	    for (int i = 0; i < cfu; i++) {
+	        if (i % 2 == 0) {
+	            comandi[i] = "vai est";
+	        } else {
+	            comandi[i] = "vai ovest";
+	        }
+	    }
+	    IOSimulator io = new IOSimulator(comandi);
+	    DiaDia gioco = new DiaDia(l, io);
+	    gioco.gioca();
+	    assertTrue(io.hasMessaggio("Hai esaurito i CFU..."));
 	}
 }

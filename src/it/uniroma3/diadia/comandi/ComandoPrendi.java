@@ -21,8 +21,8 @@ import it.uniroma3.diadia.IO;
  * @see IO
  */
 
-public class ComandoPrendi implements Comando {
-	private String nomeAttrezzo;
+public class ComandoPrendi extends AbstractComando {
+
 
 	/**
 	 * Cerca di prendere un determinato attrezzo, eventualmente rimuovendolo dalla
@@ -33,7 +33,7 @@ public class ComandoPrendi implements Comando {
 	 */
 	@Override
 	public void esegui(Partita partita, IO io) {
-		if (this.nomeAttrezzo == null) {
+		if (this.getParametro() == null) {
 			io.mostraMessaggio("Cosa vuoi prendere?");
 			return;
 		}
@@ -41,12 +41,12 @@ public class ComandoPrendi implements Comando {
 		Stanza stanzaAttuale = partita.getStanzaCorrente();
 		Borsa borsa = partita.getGiocatore().getBorsa();
 
-		if (stanzaAttuale.hasAttrezzo(this.nomeAttrezzo)) {
-			Attrezzo attrezzoDaPrendere = stanzaAttuale.getAttrezzo(this.nomeAttrezzo);
+		if (stanzaAttuale.hasAttrezzo(this.getParametro())) {
+			Attrezzo attrezzoDaPrendere = stanzaAttuale.getAttrezzo(this.getParametro());
 
 			if (borsa.addAttrezzo(attrezzoDaPrendere)) {
 				stanzaAttuale.removeAttrezzo(attrezzoDaPrendere);
-				io.mostraMessaggio("L'attrezzo '" + this.nomeAttrezzo + "' e' stato spostato nella borsa :)");
+				io.mostraMessaggio("L'attrezzo '" + this.getParametro() + "' e' stato spostato nella borsa :)");
 			} else {
 				io.mostraMessaggio("L'attrezzo è troppo pesante e non è stato possibile aggiungerlo alla borsa :(");
 			}
@@ -57,18 +57,7 @@ public class ComandoPrendi implements Comando {
 		io.mostraMessaggio(stanzaAttuale.toString());
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
-	}
-
-	@Override
 	public String getNome() {
 		return "prendi";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;
 	}
 }

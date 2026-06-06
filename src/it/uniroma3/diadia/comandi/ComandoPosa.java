@@ -21,8 +21,8 @@ import it.uniroma3.diadia.IO;
  * @see Borsa
  * @see IO
  */
-public class ComandoPosa implements Comando {
-	private String nomeAttrezzo;
+public class ComandoPosa extends AbstractComando {
+	
 
 	/**
 	 * Cerca di posare un oggetto nella stanza, eventualente rimuovendolo dalla
@@ -34,7 +34,7 @@ public class ComandoPosa implements Comando {
 
 	@Override
 	public void esegui(Partita partita, IO io) {
-		if (this.nomeAttrezzo == null) {
+		if (this.getParametro() == null) {
 			io.mostraMessaggio("Cosa vuoi posare?");
 			return;
 		}
@@ -42,11 +42,11 @@ public class ComandoPosa implements Comando {
 		Stanza stanzaAttuale = partita.getStanzaCorrente();
 		Borsa borsa = partita.getGiocatore().getBorsa();
 
-		if (borsa.hasAttrezzo(this.nomeAttrezzo)) {
-			Attrezzo attrezzoDaPosare = borsa.getAttrezzo(this.nomeAttrezzo);
+		if (borsa.hasAttrezzo(this.getParametro())) {
+			Attrezzo attrezzoDaPosare = borsa.getAttrezzo(this.getParametro());
 			if (stanzaAttuale.addAttrezzo(attrezzoDaPosare)) {
-				borsa.removeAttrezzo(this.nomeAttrezzo);
-				io.mostraMessaggio("L'attrezzo '" + this.nomeAttrezzo + "' e' stato posato nella stanza :)");
+				borsa.removeAttrezzo(this.getParametro());
+				io.mostraMessaggio("L'attrezzo '" + this.getParametro() + "' e' stato posato nella stanza :)");
 			} else {
 				io.mostraMessaggio("La stanza corrente ha troppi attrezzi, non è stato possibile posarlo :(");
 			}
@@ -56,19 +56,8 @@ public class ComandoPosa implements Comando {
 
 		io.mostraMessaggio(stanzaAttuale.toString());
 	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
-	}
-
-	@Override
 	public String getNome() {
 		return "posa";
 	}
 
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;
-	}
 }
