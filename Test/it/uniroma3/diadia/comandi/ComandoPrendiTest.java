@@ -6,19 +6,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOSimulator;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+
+import java.util.ArrayList;
 
 /**
  * Classe di testing
- * 
  * @author Davide De Prosperis, Matricola: 575620
  * @author Gabriele Crescenzi, Matricola: 628793
  * @see ComandoPrendi
- * @version 2.0
+ * @version 3.0
  */
-
 public class ComandoPrendiTest {
 
 	private Partita partita;
@@ -27,10 +28,15 @@ public class ComandoPrendiTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.partita = new Partita();
+		// Usiamo il Builder per creare il labirinto e posizionare subito l'attrezzo
+		Labirinto labirinto = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 1) 
+				.getLabirinto();
+		
+		this.partita = new Partita(labirinto);
 		this.comando = new ComandoPrendi();
-		this.io = new IOSimulator(new String[0]);
-		this.partita.getStanzaCorrente().addAttrezzo(new Attrezzo("martello", 1));
+		this.io = new IOSimulator(new ArrayList<>());
 	}
 
 	@Test

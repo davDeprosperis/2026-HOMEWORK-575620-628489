@@ -1,11 +1,13 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import java.util.*;
+
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import it.uniroma3.diadia.giocatore.Giocatore; 
-
 /**
  * Classe di Test di Accettazione per simulare partite intere.
  * @author Davide De Prosperis, Matricola: 575620
@@ -13,11 +15,15 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * @version 3.0
  */
 public class DiaDiaTest {
+	
+	@BeforeEach
+	public void setUp() {
+		
+	}
 
 	@Test
 	public void testPartitaVinta() {
-		String[] comandi = {"vai nord"}; 
-		
+		List<String> comandi = List.of("vai nord"); 		
 		IOSimulator io = new IOSimulator(comandi);
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca(); 
@@ -27,7 +33,7 @@ public class DiaDiaTest {
 
 	@Test
 	public void testPartitaEsplorazioneCompleta() {
-		String[] comandi = {"guarda", "vai est", "guarda", "prendi osso", "vai ovest", "posa osso", "fine"};
+		List<String> comandi = List.of("guarda", "vai est", "guarda", "prendi osso", "vai ovest", "posa osso", "fine");
 		
 		IOSimulator io = new IOSimulator(comandi);
 		DiaDia gioco = new DiaDia(io);
@@ -39,12 +45,12 @@ public class DiaDiaTest {
 	@Test
 	public void testPartitaPersaPerCfu() {
 		int cfu = Giocatore.CFU_INIZIALI; 
-		String[] comandi = new String[cfu + 1]; 
-		for (int i = 0; i < cfu; i++) { //facciamo andare in loop a destra e sinistra per finire i cfu
+		List<String> comandi = new ArrayList<>(); 
+		for (int i = 0; i < cfu; i++) {
 			if (i % 2 == 0) {
-				comandi[i] = "vai est";
+				comandi.add("vai est");
 			} else {
-				comandi[i] = "vai ovest";
+				comandi.add("vai ovest");
 			}
 		}
 		IOSimulator io = new IOSimulator(comandi);
@@ -53,7 +59,9 @@ public class DiaDiaTest {
 		
 		assertTrue(io.hasMessaggio("Hai esaurito i CFU..."));
 	}
+	
 	//test di simulazione per partite intere
+	
 	@Test
 	public void testPartitaVintaConBuilder() {
 	    Labirinto l = new LabirintoBuilder()
@@ -61,7 +69,7 @@ public class DiaDiaTest {
 	        .addStanzaVincente("camera")
 	        .addAdiacenza("salotto", "camera", "nord")
 	        .getLabirinto();
-	    String[] comandi = {"vai nord"};
+	    List<String> comandi = List.of("vai nord");
 	    IOSimulator io = new IOSimulator(comandi);
 	    DiaDia gioco = new DiaDia(l, io);
 	    gioco.gioca();
@@ -76,7 +84,7 @@ public class DiaDiaTest {
 	        .addStanzaVincente("camera")
 	        .addAdiacenza("salotto", "camera", "nord")
 	        .getLabirinto();
-	    String[] comandi = {"prendi chiave", "vai nord"};
+	    List<String> comandi = List.of("prendi chiave", "vai nord");
 	    IOSimulator io = new IOSimulator(comandi);
 	    DiaDia gioco = new DiaDia(l, io);
 	    gioco.gioca();
@@ -93,12 +101,12 @@ public class DiaDiaTest {
 	        .addStanzaVincente("camera")
 	        .getLabirinto();
 	    int cfu = Giocatore.CFU_INIZIALI;
-	    String[] comandi = new String[cfu];
+	    List<String> comandi = new ArrayList<String>();
 	    for (int i = 0; i < cfu; i++) {
 	        if (i % 2 == 0) {
-	            comandi[i] = "vai est";
+	            comandi.add("vai est");
 	        } else {
-	            comandi[i] = "vai ovest";
+	            comandi.add("vai ovest");
 	        }
 	    }
 	    IOSimulator io = new IOSimulator(comandi);

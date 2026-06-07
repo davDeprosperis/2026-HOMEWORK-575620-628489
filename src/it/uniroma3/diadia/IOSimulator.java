@@ -25,13 +25,9 @@ public class IOSimulator implements IO {
 	 * 
 	 * @param righeDaLeggere l'array dei comandi preimpostati
 	 */
-	public IOSimulator(String[] righeDaLeggere) {
-		this.righeLette = new LinkedList<String>();
-		for (String riga : righeDaLeggere) {
-		    this.righeLette.add(riga);
-		}
-		this.messaggiProdotti =new ArrayList<String>();
-			
+	public IOSimulator(List<String> righeDaLeggere) {
+		this.righeLette = new LinkedList<>(righeDaLeggere);
+		this.messaggiProdotti = new ArrayList<>();
 	}
 
 	/**

@@ -4,32 +4,44 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
-import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 public class ComandoRegala extends AbstractComando {
-    
 
     @Override
     public void esegui(Partita partita, IO io) {
-        if(this.getParametro()==null) {
-        	io.mostraMessaggio("Cosa vuoi regalare?");
-        	return;
+        if (this.getParametro() == null) {
+            io.mostraMessaggio("Cosa vuoi regalare?");
+            return;
         }
-        Stanza stanzaAttuale=partita.getStanzaCorrente();
-        Borsa borsa=partita.getGiocatore().getBorsa();
-        if(borsa.hasAttrezzo(this.getParametro())) {
-        	Attrezzo attrezzoDaRegalare=borsa.getAttrezzo(this.getParametro());
-        	if(stanzaAttuale.addAttrezzo(attrezzoDaRegalare)) {
-        		borsa.removeAttrezzo(this.getParametro());
-        		io.mostraMessaggio("L'attrezzo '"+this.getParametro()+"' non è presente nella borsa");
-        	}else {
-        		io.mostraMessaggio("L'attrezzo '"+this.getParametro()+"'è stato regalato");
-        	}
-        	io.mostraMessaggio(stanzaAttuale.toString());
+
+        // 1. C'è qualcuno nella stanza?
+        AbstractPersonaggio personaggio = partita.getStanzaCorrente().getPersonaggio();
+        if (personaggio == null) {
+            io.mostraMessaggio("Non c'è nessuno a cui regalare qualcosa in questa stanza!");
+            return;
+        }
+
+        Borsa borsa = partita.getGiocatore().getBorsa();
+        
+        // 2. Hai davvero questo attrezzo nella borsa?
+        if (borsa.hasAttrezzo(this.getParametro())) {
+        	
+            // Prendo l'attrezzo e lo rimuovo dalla mia borsa
+            Attrezzo attrezzoDaRegalare = borsa.getAttrezzo(this.getParametro());
+            borsa.removeAttrezzo(this.getParametro());
+            
+            // 3. Consegno l'attrezzo al personaggio e stampo la sua reazione polimorfica
+            String risposta = personaggio.riceviRegalo(attrezzoDaRegalare, partita);
+            io.mostraMessaggio(risposta);
+            
+        } else {
+            io.mostraMessaggio("L'attrezzo '" + this.getParametro() + "' non è presente nella tua borsa.");
         }
     }
 
-   public String getNome() {
-	   return "regala";
-   }
+    @Override
+    public String getNome() {
+        return "regala";
+    }
 }

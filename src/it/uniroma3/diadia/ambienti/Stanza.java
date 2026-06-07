@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.*;
 import it.uniroma3.diadia.Direzione;
 import java.util.*;
 
@@ -23,6 +24,7 @@ public class Stanza {
 	private String nome;
 	private Map<String,Attrezzo> attrezzi;
 	private Map<Direzione,Stanza> stanzeAdiacenti;
+	private AbstractPersonaggio personaggio;
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -145,6 +147,22 @@ public class Stanza {
 	
 	public Set<Direzione> getDirezioni() {
 	    return this.stanzeAdiacenti.keySet();
+	}
+	
+	/**
+	 * Imposta il personaggio presente all'interno della stanza.
+	 * * @param personaggio Il personaggio da inserire nella stanza
+	 */
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+
+	/**
+	 * Restituisce il personaggio presente nella stanza, se esiste.
+	 * * @return l'oggetto AbstractPersonaggio, oppure null se la stanza è vuota
+	 */
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
 	}
 
 }

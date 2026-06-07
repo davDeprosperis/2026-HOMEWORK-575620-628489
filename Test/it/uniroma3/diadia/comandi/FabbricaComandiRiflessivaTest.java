@@ -1,53 +1,41 @@
 package it.uniroma3.diadia.comandi;
 
-
 import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FabbricaComandiRiflessivaTest {
 
-@Test
-public void testComandoNonValido() {
-    FabbricaDiComandiRiflessiva fabbrica = new FabbricaDiComandiRiflessiva();
-    try {
-        fabbrica.costruisciComando("corri");
-        fail("avrebbe dovuto lanciare un'eccezione");
-    } catch(Exception e) {
-        
+    private FabbricaDiComandiRiflessiva fabbrica;
+
+    @BeforeEach
+    public void setUp() {
+        this.fabbrica = new FabbricaDiComandiRiflessiva();
     }
-}
-@Test
-public void testComandoValido_Vai() {
-	FabbricaDiComandiRiflessiva fabbrica=new FabbricaDiComandiRiflessiva();
-	try {
-		Comando c=fabbrica.costruisciComando("vai nord");
-		assertEquals("vai",c.getNome());
-	} catch(Exception e) {
-		fail ("Il test è corretto non devi lanciare eccezioni");
-	}
-}
-@Test
-public void testParametroValido_Nord() {
-	FabbricaDiComandiRiflessiva fabbrica=new FabbricaDiComandiRiflessiva();
-	try {
-		Comando c=fabbrica.costruisciComando("vai nord");
-		assertEquals("nord", c.getParametro());
-	}catch(Exception e){
-		fail("non dovevi lanciare un'eccezione");
-	}
-}
-@Test
-public void testParametroNonValido() {
-	FabbricaDiComandiRiflessiva fabbrica=new FabbricaDiComandiRiflessiva();
-	try {
-		fabbrica.costruisciComando("Oveste");
-		fail("Oveste non è valido dovevi lanciare un'eccezzione");
-		
-	}catch(Exception e) {
-		//prova a prenderla
-	}
-}
 
+    @Test
+    public void testComandoNonValido() {
+        // Ora il metodo non lancia eccezioni, restituisce ComandoNonValido
+        Comando c = fabbrica.costruisciComando("corri");
+        assertEquals("non valido", c.getNome());
+    }
 
+    @Test
+    public void testComandoValido_Vai() {
+        Comando c = fabbrica.costruisciComando("vai nord");
+        assertEquals("vai", c.getNome());
+    }
+
+    @Test
+    public void testParametroValido_Nord() {
+        Comando c = fabbrica.costruisciComando("vai nord");
+        assertEquals("nord", c.getParametro());
+    }
+
+    @Test
+    public void testParametroNonValido() {
+        // "Oveste" non esiste, quindi deve restituire ComandoNonValido
+        Comando c = fabbrica.costruisciComando("Oveste");
+        assertEquals("non valido", c.getNome());
+    }
 }
