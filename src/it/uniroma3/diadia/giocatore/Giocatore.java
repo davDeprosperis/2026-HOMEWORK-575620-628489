@@ -1,28 +1,27 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.Configuratore;
+
 /**
  * Questa classe ha il compito di rappresentare un giocatore, avente una borsa e
  * determinati cfu
- * 
- * @author docente di POO
+ * * @author docente di POO
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Borsa
  * @version 2.0
  */
-
 public class Giocatore {
-	static final public int CFU_INIZIALI = 20;
 	private Borsa borsa;
 	private int cfu;
 
 	/**
-	 * Crea un nuovo giocatore con i valori iniziali di default. Assegna il numero
-	 * massimo di CFU iniziali e dota il giocatore di una borsa vuota.
+	 * Crea un nuovo giocatore. Assegna il numero massimo di CFU iniziali 
+	 * leggendoli dal file properties e dota il giocatore di una borsa vuota.
 	 */
 	public Giocatore() {
 		this.borsa = new Borsa();
-		this.cfu = CFU_INIZIALI;
+		this.cfu = Configuratore.getCfu();
 	}
 
 	public void setCfu(int cfu) {
@@ -45,5 +44,4 @@ public class Giocatore {
 	public Borsa getBorsa() {
 		return this.borsa;
 	}
-
 }

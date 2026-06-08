@@ -6,7 +6,7 @@ import java.util.Scanner;
  * classe dedicata alla fabbrica di comandi, gestisce tutti i possibili comandi
  * 
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @version 2.0
  * 
  */

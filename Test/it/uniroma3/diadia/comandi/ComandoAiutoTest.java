@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.IOSimulator;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import java.util.ArrayList;
 
 public class ComandoAiutoTest {
@@ -18,8 +18,8 @@ public class ComandoAiutoTest {
     @BeforeEach
     public void setUp() {
         this.comando = new ComandoAiuto();
-        this.io = new IOSimulator(new ArrayList<>());
-        this.partita = new Partita(new LabirintoBuilder().addStanzaIniziale("Atrio").getLabirinto());
+        this.io = new IOSimulator(new ArrayList<String>());
+        this.partita = new Partita(Labirinto.newBuilder().addStanzaIniziale("Atrio").getLabirinto());
     }
 
     @Test

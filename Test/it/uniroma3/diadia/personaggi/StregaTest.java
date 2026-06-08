@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class StregaTest {
@@ -17,7 +16,7 @@ public class StregaTest {
 	@BeforeEach
 	public void setUp() {
 		// Creiamo un labirinto con una stanza ricca e una povera
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("Atrio")
 				
 				.addStanza("StanzaRicca")

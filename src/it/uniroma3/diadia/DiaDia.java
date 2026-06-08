@@ -1,8 +1,8 @@
 package it.uniroma3.diadia;
+
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
-
-
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
@@ -15,15 +15,12 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
  *
  * @author docente di POO (da un'idea di Michael Kolling and David J. Barnes)
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
- * 
- * @see Partita
+ * @author Leonardo Coloricchio, Matricola: 628489
+ * * @see Partita
  * @see IOConsole
  * @see Comando
- * 
- * @version 3.0
+ * * @version 3.0
  */
-
 public class DiaDia {
 
 	private static final String MESSAGGIO_BENVENUTO = ""
@@ -38,21 +35,16 @@ public class DiaDia {
 	private Partita partita;
 	private IO io;
 
-	/**
-	 * Crea una nuova istanza del gioco DiaDia. Inizializza la partita e imposta la
-	 * console per l'interazione con l'utente.
-	 * 
-	 * @param io l'interfaccia IO da utilizzare per la comunicazione
-	 */
-
 	public DiaDia(IO io) {
 		this.io = io;
 		this.partita = new Partita();
 	}
+	
 	public DiaDia(Labirinto labirinto, IO io) {
 	    this.io = io;
 	    this.partita = new Partita(labirinto);
 	}
+	
 	public void gioca() {
 		String istruzione;
 
@@ -63,30 +55,16 @@ public class DiaDia {
 		while (!processaIstruzione(istruzione));
 	}
 
-	/**
-	 * Processa una istruzione
-	 *
-	 * @return true se l'istruzione e' eseguita e il gioco continua, false
-	 *         altrimenti
-	 */
-	/**
-	 * Processa una istruzione
-	 *
-	 * @return true se l'istruzione e' eseguita e il gioco continua, false
-	 * altrimenti
-	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
 		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 		
 		try {
-			// Proviamo a costruire ed eseguire il comando
 			comandoDaEseguire = factory.costruisciComando(istruzione);
 			comandoDaEseguire.esegui(this.partita, this.io);
 		} catch (Exception e) {
-			// Se la fabbrica lancia un'eccezione, la catturiamo e avvisiamo l'utente
 			this.io.mostraMessaggio("Comando non valido o errore di esecuzione.");
-			return false; // Restituiamo false per far continuare il ciclo del gioco
+			return false; 
 		}
 
 		if (this.partita.vinta())
@@ -98,13 +76,18 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) {
-	    IO io = new IOConsole();
-	    Labirinto labirinto = new LabirintoBuilder()
-	        .addStanzaIniziale("Atrio")
-	        .addStanzaVincente("Biblioteca")
-	        .addAdiacenza("Atrio", "Biblioteca", "nord")
-	        .getLabirinto();
-	    DiaDia gioco = new DiaDia(labirinto, io);
-	    gioco.gioca();
-	}
+        // La risorsa Scanner viene aperta qui e chiusa automaticamente alla fine del blocco
+        try (Scanner scanner = new Scanner(System.in)) {
+            IO io = new IOConsole(scanner);
+            
+            Labirinto labirinto = Labirinto.newBuilder()
+                .addStanzaIniziale("Atrio")
+                .addStanzaVincente("Biblioteca")
+                .addAdiacenza("Atrio", "Biblioteca", "nord")
+                .getLabirinto();
+            
+            DiaDia gioco = new DiaDia(labirinto, io);
+            gioco.gioca();
+        } 
+    }
 }

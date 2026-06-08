@@ -6,7 +6,7 @@ import it.uniroma3.diadia.Direzione;
  * Una delle direzioni non puo' essere seguita a meno che nella stanza
  * non sia presente uno specifico attrezzo sbloccante.
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Stanza
  * @see Direzione
  * @version 3.0

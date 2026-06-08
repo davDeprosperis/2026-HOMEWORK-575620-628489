@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class CaneTest {
@@ -15,7 +15,7 @@ public class CaneTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.partita = new Partita(new LabirintoBuilder().addStanzaIniziale("Giardino").getLabirinto());
+		this.partita = new Partita(Labirinto.newBuilder().addStanzaIniziale("Giardino").getLabirinto());
 		this.cane = new Cane("Fuffi", "un cane ringhiante");
 	}
 

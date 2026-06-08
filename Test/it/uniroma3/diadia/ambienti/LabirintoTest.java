@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Classe di testing
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Labirinto
  * @version 2.0
  */
@@ -16,15 +16,16 @@ import org.junit.jupiter.api.Test;
 class LabirintoTest {
 
 	@Test
-	
 	void testStanzaInizialeAtrio() {
-		assertEquals("Atrio", new Labirinto().getStanzaIniziale().getNome());	
+        // Avendo rimosso il costruttore cablato, generiamo noi una stanza per testare i getter
+        Labirinto l = Labirinto.newBuilder().addStanzaIniziale("Atrio").getLabirinto();
+		assertEquals("Atrio", l.getStanzaIniziale().getNome());	
 	}
 	
 	@Test
-	
 	void testStanzaVincenteBiblioteca() {
-		assertEquals("Biblioteca", new Labirinto().getStanzaVincente().getNome());	
+        Labirinto l = Labirinto.newBuilder().addStanzaVincente("Biblioteca").getLabirinto();
+		assertEquals("Biblioteca", l.getStanzaVincente().getNome());	
 	}
 
 }

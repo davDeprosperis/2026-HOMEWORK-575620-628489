@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class MagoTest {
@@ -15,7 +15,7 @@ public class MagoTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.partita = new Partita(new LabirintoBuilder().addStanzaIniziale("Atrio").getLabirinto());
+		this.partita = new Partita(Labirinto.newBuilder().addStanzaIniziale("Atrio").getLabirinto());
 		this.mago = new Mago("Merlino", "un mago saggio", new Attrezzo("bacchetta", 2));
 	}
 

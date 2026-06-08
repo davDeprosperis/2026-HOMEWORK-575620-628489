@@ -12,7 +12,7 @@ import java.util.*;
  * 
  * @author docente di POO,
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola:
+ * @author Leonardo Coloricchio, Matricola: 628489
  * 
  * @see Attrezzo
  * @see Direzione

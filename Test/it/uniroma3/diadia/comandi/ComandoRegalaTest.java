@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.IOSimulator;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.Mago;
 
@@ -20,9 +20,9 @@ public class ComandoRegalaTest {
 
 	@BeforeEach
 	public void setUp() {
-		this.partita = new Partita(new LabirintoBuilder().addStanzaIniziale("Atrio").getLabirinto());
+		this.partita = new Partita(Labirinto.newBuilder().addStanzaIniziale("Atrio").getLabirinto());
 		this.comando = new ComandoRegala();
-		this.io = new IOSimulator(new ArrayList<>());
+		this.io = new IOSimulator(new ArrayList<String>());
 	}
 
 	@Test

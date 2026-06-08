@@ -1,7 +1,9 @@
 package it.uniroma3.diadia.giocatore;
 
+import it.uniroma3.diadia.Configuratore;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import java.util.*;
+
 /**
  * Classe che modella la borsa del giocatore.
  * Permette di aggiungere e rimuovere attrezzi, tenendo conto
@@ -9,36 +11,35 @@ import java.util.*;
  *
  * @author  docente di POO
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see    Attrezzo
  * @version 3.0
  */
-
 public class Borsa {
-	public final static int DEFAULT_PESO_MAX_BORSA = 10;
 	private Map<String,Attrezzo> attrezzi;
 	private int pesoMax;
 
 	/**
-     *Crea una borsa con una capacita' di carico default.
+     * Crea una borsa con una capacita' di carico letta dal file properties.
      */
 	public Borsa() {
-		this(DEFAULT_PESO_MAX_BORSA);
+		this(Configuratore.getPesoMax());
 	}
+	
 	/**
      * Crea una borsa con una capacita' di carico definita.
-     * * @param pesoMax Il limite di peso massimo trasportabile nella borsa
+     * @param pesoMax Il limite di peso massimo trasportabile nella borsa
      */
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
 		this.attrezzi = new HashMap<>(); 
 	}
-/**
- * Aggiunge, se possibile, un attrezzo alla borsa
- * 
- * @param attrezzo
- * @return true se l'attrezzo è stato aggiunto, false altrimenti
- */
+	
+	/**
+	 * Aggiunge, se possibile, un attrezzo alla borsa
+	 * * @param attrezzo
+	 * @return true se l'attrezzo è stato aggiunto, false altrimenti
+	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
 		if (attrezzo == null || this.getPeso() + attrezzo.getPeso() > this.getPesoMax())
 			return false;
@@ -46,25 +47,26 @@ public class Borsa {
 		return true;
 	}
 	
-/**
- * 
- * @return peso massimo trasportabile dalla borsa
- */
+	/**
+	 * * @return peso massimo trasportabile dalla borsa
+	 */
 	public int getPesoMax() {
 		return pesoMax;
 	}
-/**
- * Ha lo scopo di ritornare l'attrezzo avente il nome offerto come parametro
- * @param nomeAttrezzo Il nome dell'attrezzo
- * @return l'attrezzo avente nome cercato, se presente, altrimenti null
- */
+	
+	/**
+	 * Ha lo scopo di ritornare l'attrezzo avente il nome offerto come parametro
+	 * @param nomeAttrezzo Il nome dell'attrezzo
+	 * @return l'attrezzo avente nome cercato, se presente, altrimenti null
+	 */
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
 		return this.attrezzi.get(nomeAttrezzo);
 	}
-/**
- * Ha lo scopo di ritornare il peso totale degli oggetti presenti nella borsa
- * @return peso della borsa
- */
+	
+	/**
+	 * Ha lo scopo di ritornare il peso totale degli oggetti presenti nella borsa
+	 * @return peso della borsa
+	 */
 	public int getPeso() {
 		int peso = 0;
 		for (Attrezzo a : this.attrezzi.values()) {
@@ -72,24 +74,24 @@ public class Borsa {
 		}
 		return peso;
 	}
-/**
- * Verifica che la borsa sia vuota
- * 
- * @return true se la borsa e'vuota, false altrmenti
- */
+	
+	/**
+	 * Verifica che la borsa sia vuota
+	 * * @return true se la borsa e'vuota, false altrmenti
+	 */
 	public boolean isEmpty() {
 		return this.attrezzi.isEmpty();
 	}
-/**
- * Cerca un oggetto all'interno della borsa
- * @param nomeAttrezzo Il nome dell'attrezzo da cercare
- * @return true se l'attrezzo e' presente nella borsa, false altrimenti
- */
+	
+	/**
+	 * Cerca un oggetto all'interno della borsa
+	 * @param nomeAttrezzo Il nome dell'attrezzo da cercare
+	 * @return true se l'attrezzo e' presente nella borsa, false altrimenti
+	 */
 	public boolean hasAttrezzo(String nomeAttrezzo) {
 		return this.attrezzi.containsKey(nomeAttrezzo);
 	}
 
-	
 	/**
 	 * Cerca di rimuovere un determinato attrezzo avente nome fornito come parametro
 	 * ritornando eventualmente l'attrezzo appena rimosso.

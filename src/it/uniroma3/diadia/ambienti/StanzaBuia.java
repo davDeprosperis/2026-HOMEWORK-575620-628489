@@ -6,7 +6,7 @@ package it.uniroma3.diadia.ambienti;
  * sara' "qui c'è un buio pesto".
  * 
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Stanza
  * @version 3.0
  */

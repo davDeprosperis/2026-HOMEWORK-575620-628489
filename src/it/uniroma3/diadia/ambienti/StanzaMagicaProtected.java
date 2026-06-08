@@ -7,7 +7,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * Classe StanzaMagicaProtected - come StanzaMagica ma sfruttando le variabili
  * protected di StanzaProtected
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ *@author Leonardo Coloricchio, Matricola: 628489
  * @see StanzaProtected
  * @see Attrezzo
  * @version 3.0

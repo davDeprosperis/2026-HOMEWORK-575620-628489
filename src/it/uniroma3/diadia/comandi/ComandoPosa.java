@@ -12,7 +12,7 @@ import it.uniroma3.diadia.IO;
  * attrezzo dalla borsa e posarlo nella stanza corrente.
  * 
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @version 2.0
  * @see Partita
  * @see Comando

@@ -9,12 +9,11 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  *
  * @author docente di POO
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Stanza
  * @see Giocatore
  * @version 2.0
  */
-
 public class Partita {
 
 	private Stanza stanzaCorrente;
@@ -23,16 +22,19 @@ public class Partita {
 	private Giocatore giocatore;
 
 	/**
-	 * Crea una nuova partita inizializzando il mondo di gioco. Crea il labirinto
-	 * con tutte le stanze, posiziona gli attrezzi e inizializza il giocatore e lo
-	 * stato della partita.
+	 * Crea una nuova partita usando il builder per generare un labirinto di default.
 	 */
 	public Partita() {
-		this.labirinto = new Labirinto();
+        // Al posto di new Labirinto() passiamo tramite il Builder per evitare l'errore
+		this.labirinto = Labirinto.newBuilder()
+                            .addStanzaIniziale("Atrio")
+                            .addStanzaVincente("Biblioteca")
+                            .getLabirinto();
 		this.stanzaCorrente = labirinto.getStanzaIniziale();
 		this.finita = false;
 		this.giocatore = new Giocatore();
 	}
+	
 	public Partita(Labirinto labirinto) {
 	    this.labirinto = labirinto;
 	    this.stanzaCorrente = labirinto.getStanzaIniziale();
@@ -62,7 +64,6 @@ public class Partita {
 
 	/**
 	 * Restituisce vero se e solo se la partita e' stata vinta
-	 * 
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
@@ -71,7 +72,6 @@ public class Partita {
 
 	/**
 	 * Restituisce vero se e solo se la partita e' finita
-	 * 
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
@@ -80,10 +80,8 @@ public class Partita {
 
 	/**
 	 * Imposta la partita come finita
-	 *
 	 */
 	public void setFinita() {
 		this.finita = true;
 	}
-
 }

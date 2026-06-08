@@ -12,26 +12,19 @@ public class CaricatoreLabirinto {
     private static final String ATTREZZI   = "Attrezzi:";
     private static final String USCITE     = "Uscite:";
 
-    private LabirintoBuilder builder;
+    // Ora si usa la classe nidificata
+    private Labirinto.LabirintoBuilder builder; 
     private LineNumberReader reader;
 
-    /**
-     * Costruttore generico: accetta qualsiasi Reader.
-     * Usare StringReader nei test, FileReader in produzione.
-     */
     public CaricatoreLabirinto(Reader reader) {
-        this.builder = new LabirintoBuilder();
+        // Factory method al posto di 'new LabirintoBuilder()'
+        this.builder = Labirinto.newBuilder(); 
         this.reader  = new LineNumberReader(reader);
     }
 
-    /** Costruttore comodo per uso reale con file su disco. */
     public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
         this(new FileReader(nomeFile));
     }
-
-    // =========================================================
-    //  Entry point
-    // =========================================================
 
     public void carica() throws IOException {
         this.leggiStanze();
@@ -42,19 +35,6 @@ public class CaricatoreLabirinto {
         this.reader.close();
     }
 
-    // =========================================================
-    //  Sezioni
-    // =========================================================
-
-    /**
-     * Legge tutte le stanze dalla sezione "Stanze:".
-     * Ogni riga può avere uno dei seguenti formati:
-     *   "Atrio"                          -> Stanza normale
-     *   "Sala buia lanterna"             -> StanzaBuia
-     *   "Corridoio bloccata nord chiave" -> StanzaBloccata
-     *   "Magica magica"                  -> StanzaMagica (soglia default = 3)
-     *   "Magica magica 5"                -> StanzaMagica (soglia = 5)
-     */
     private void leggiStanze() throws IOException {
         reader.mark(1024);
         String riga = leggiRigaSignificativa();
@@ -66,7 +46,7 @@ public class CaricatoreLabirinto {
         while (true) {
             reader.mark(1024);
             riga = reader.readLine();
-            if (riga == null || riga.isBlank() || isIntestazione(riga)) {
+            if (riga == null || riga.trim().isEmpty() || isIntestazione(riga)) { // Corretto isBlank
                 reader.reset();
                 break;
             }
@@ -86,11 +66,6 @@ public class CaricatoreLabirinto {
         }
     }
 
-    /**
-     * Legge la sezione "Estremi:" che contiene due righe:
-     *   prima riga:  nome stanza iniziale
-     *   seconda riga: nome stanza vincente
-     */
     private void leggiEstremi() throws IOException {
         reader.mark(1024);
         String riga = leggiRigaSignificativa();
@@ -105,15 +80,6 @@ public class CaricatoreLabirinto {
         if (nomeStanzaVincente != null) builder.addStanzaVincente(nomeStanzaVincente.trim());
     }
 
-    /**
-     * Legge la sezione "Personaggi:".
-     * Formato di ogni riga:
-     *   "nomeStanza tipo nomePersonaggio presentazione..."
-     * Esempi:
-     *   "Atrio cane Fido Sono un cane feroce!"
-     *   "N10 mago Merlino Sono un mago potente!"
-     *   "Magica strega Circe Sono una strega!"
-     */
     private void leggiPersonaggi() throws IOException {
         reader.mark(1024);
         String riga = leggiRigaSignificativa();
@@ -125,11 +91,10 @@ public class CaricatoreLabirinto {
         while (true) {
             reader.mark(1024);
             riga = reader.readLine();
-            if (riga == null || riga.isBlank() || isIntestazione(riga)) {
+            if (riga == null || riga.trim().isEmpty() || isIntestazione(riga)) { // Corretto isBlank
                 reader.reset();
                 break;
             }
-            // split con limite 4: [nomeStanza, tipo, nomePersonaggio, "presentazione..."]
             String[] tokens = riga.trim().split("\\s+", 4);
             if (tokens.length < 3) continue;
 
@@ -143,13 +108,6 @@ public class CaricatoreLabirinto {
         }
     }
 
-    /**
-     * Legge la sezione "Attrezzi:".
-     * Formato di ogni riga:
-     *   "nomeAttrezzo peso nomeStanza"
-     * Esempio:
-     *   "osso 5 N10"
-     */
     private void leggiAttrezzi() throws IOException {
         reader.mark(1024);
         String riga = leggiRigaSignificativa();
@@ -161,7 +119,7 @@ public class CaricatoreLabirinto {
         while (true) {
             reader.mark(1024);
             riga = reader.readLine();
-            if (riga == null || riga.isBlank() || isIntestazione(riga)) {
+            if (riga == null || riga.trim().isEmpty() || isIntestazione(riga)) { // Corretto isBlank
                 reader.reset();
                 break;
             }
@@ -175,13 +133,6 @@ public class CaricatoreLabirinto {
         }
     }
 
-    /**
-     * Legge la sezione "Uscite:".
-     * Formato di ogni riga:
-     *   "nomeStanza1 direzione nomeStanza2"
-     * Esempio:
-     *   "N10 nord Biblioteca"
-     */
     private void leggiUscite() throws IOException {
         reader.mark(1024);
         String riga = leggiRigaSignificativa();
@@ -193,7 +144,7 @@ public class CaricatoreLabirinto {
         while (true) {
             reader.mark(1024);
             riga = reader.readLine();
-            if (riga == null || riga.isBlank() || isIntestazione(riga)) {
+            if (riga == null || riga.trim().isEmpty() || isIntestazione(riga)) { // Corretto isBlank
                 reader.reset();
                 break;
             }
@@ -207,14 +158,6 @@ public class CaricatoreLabirinto {
         }
     }
 
-    // =========================================================
-    //  Factory dei personaggi
-    // =========================================================
-
-    /**
-     * Crea il personaggio giusto in base al tipo.
-     * Tipi riconosciuti: "cane", "mago", "strega".
-     */
     private AbstractPersonaggio creaPersonaggio(String tipo, String nomePersonaggio, String presentazione) {
         switch (tipo) {
             case "cane":   return new Cane(nomePersonaggio, presentazione);
@@ -227,20 +170,14 @@ public class CaricatoreLabirinto {
         }
     }
 
-    // =========================================================
-    //  Utilità di lettura
-    // =========================================================
-
-    /** Legge e restituisce la prossima riga non vuota (o null a fine file). */
     private String leggiRigaSignificativa() throws IOException {
         String riga;
         do {
             riga = reader.readLine();
-        } while (riga != null && riga.isBlank());
+        } while (riga != null && riga.trim().isEmpty()); // Corretto isBlank
         return riga;
     }
 
-    /** Restituisce true se la riga è un'intestazione di sezione. */
     private boolean isIntestazione(String riga) {
         return riga.startsWith(STANZE)     ||
                riga.startsWith(ESTREMI)    ||
@@ -248,10 +185,6 @@ public class CaricatoreLabirinto {
                riga.startsWith(ATTREZZI)   ||
                riga.startsWith(USCITE);
     }
-
-    // =========================================================
-    //  Getter
-    // =========================================================
 
     public Labirinto getLabirinto() {
         return builder.getLabirinto();

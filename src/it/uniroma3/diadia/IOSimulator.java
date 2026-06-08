@@ -10,7 +10,7 @@ import java.util.List;
  * messaggi stampati dal gioco per poterli verificare.
  * 
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see IO
  * @version 2.0
  */

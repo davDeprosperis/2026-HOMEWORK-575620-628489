@@ -8,7 +8,7 @@ package it.uniroma3.diadia.attrezzi;
  *
  * @author docente di POO
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @version 2.0
  */
 

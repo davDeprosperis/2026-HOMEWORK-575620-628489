@@ -8,7 +8,7 @@ import it.uniroma3.diadia.Comando;
 /**
  * Classe di testing
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Comando
  * @version 3.0
  */

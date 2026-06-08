@@ -2,29 +2,21 @@ package it.uniroma3.diadia;
 
 import java.util.Scanner;
 
-/**
- * Gestisce l'I/O tramite console.
- * 
- * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
- * @version 2.0
- */
-
 public class IOConsole implements IO {
-	private Scanner scannerDiLinee;
+    private Scanner scannerDiLinee;
 
-	public IOConsole() {
-		this.scannerDiLinee = new Scanner(System.in);
-	}
+    // Il costruttore ora richiede uno Scanner come parametro
+    public IOConsole(Scanner scanner) {
+        this.scannerDiLinee = scanner;
+    }
 
-	@Override
-	public void mostraMessaggio(String msg) {
-		System.out.println(msg);
-	}
+    @Override
+    public void mostraMessaggio(String msg) {
+        System.out.println(msg);
+    }
 
-	@Override
-	public String leggiRiga() {
-		return scannerDiLinee.nextLine();
-	}
-
+    @Override
+    public String leggiRiga() {
+        return scannerDiLinee.nextLine();
+    }
 }

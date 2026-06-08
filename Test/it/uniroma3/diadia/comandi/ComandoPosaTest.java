@@ -10,14 +10,13 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 import java.util.ArrayList;
 
 /**
  * Classe di testing
  * * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see ComandoPosa
  * @version 3.0
  */
@@ -30,13 +29,13 @@ public class ComandoPosaTest {
 	@BeforeEach
 	public void setUp() {
 		// Fixture: Labirinto "Monolocale" come richiesto dall'Esercizio 8
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("Atrio")
 				.getLabirinto();
 		
 		this.partita = new Partita(labirinto);
 		this.comando = new ComandoPosa();
-		this.io = new IOSimulator(new ArrayList<>());
+		this.io = new IOSimulator(new ArrayList<String>());
 		
 		// Aggiungiamo l'attrezzo direttamente nella borsa del giocatore per testarne la posa
 		this.partita.getGiocatore().getBorsa().addAttrezzo(new Attrezzo("martello", 1));

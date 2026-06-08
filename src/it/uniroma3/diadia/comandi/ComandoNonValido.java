@@ -7,7 +7,7 @@ import it.uniroma3.diadia.IO;
  * Classe che modella un comando non riconosciuto dal gioco.
  * 
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @version 2.0
  * @see Comando
  * @see Partita

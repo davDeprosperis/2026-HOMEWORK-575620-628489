@@ -8,14 +8,13 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 import java.util.ArrayList;
 
 /**
  * Classe di testing per ComandoVai.
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see ComandoVai
  * @version 3.0
  */
@@ -27,12 +26,12 @@ public class ComandoVaiTest {
 	@BeforeEach
 	public void setUp() {
 		this.comando = new ComandoVai();
-		this.io = new IOSimulator(new ArrayList<>()); 
+		this.io = new IOSimulator(new ArrayList<String>()); 
 	}
 
 	@Test
 	public void testVaiDirezioneValida() {
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("Atrio")
 				.addStanza("Biblioteca")
 				.addAdiacenza("Atrio", "Biblioteca", "nord")
@@ -50,7 +49,7 @@ public class ComandoVaiTest {
 
 	@Test
 	public void testVaiDirezioneInesistente() {
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("Atrio")
 				.getLabirinto();
 		
@@ -66,7 +65,7 @@ public class ComandoVaiTest {
 
 	@Test
 	public void testVaiSenzaDirezione() {
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaIniziale("Atrio")
 				.getLabirinto();
 		
@@ -82,7 +81,7 @@ public class ComandoVaiTest {
 
 	@Test
 	public void testVaiStanzaBloccataSenzaAttrezzo() {
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaBloccataIniziale("Stanza Bloccata", "nord", "chiave")
 				.addStanza("Stanza Successiva")
 				.addAdiacenza("Stanza Bloccata", "Stanza Successiva", "nord")
@@ -98,7 +97,7 @@ public class ComandoVaiTest {
 
 	@Test
 	public void testVaiStanzaBloccataConAttrezzo() {
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder()
 				.addStanzaBloccataIniziale("Stanza Bloccata", "nord", "chiave")
 				.addAttrezzo("chiave", 1) 
 				.addStanza("Stanza Successiva")

@@ -7,7 +7,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * fisico nel gioco. E' collegata ad altre stanze attraverso delle uscite. Ogni
  * uscita e' associata ad una direzione.
  * @author Davide De Prosperis, Matricola: 575620
- * @author Gabriele Crescenzi, Matricola: 628793
+ * @author Leonardo Coloricchio, Matricola: 628489
  * @see Attrezzo
  * @version base
  */
