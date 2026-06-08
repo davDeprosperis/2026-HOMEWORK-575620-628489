@@ -12,7 +12,7 @@ import java.util.List;
  * @author Davide De Prosperis, Matricola: 575620
  * @author Leonardo Coloricchio, Matricola: 628489
  * @see IO
- * @version 2.0
+ * @version 3.0
  */
 public class IOSimulator implements IO {
 
@@ -39,7 +39,7 @@ public class IOSimulator implements IO {
 	    if (!this.righeLette.isEmpty()) {
 	        return this.righeLette.removeFirst();
 	    }
-	    return null;
+	    return "fine"; 
 	}
 
 	/**

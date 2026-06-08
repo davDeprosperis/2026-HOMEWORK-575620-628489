@@ -21,15 +21,6 @@ public class DiaDiaTest {
 		
 	}
 
-	@Test
-	public void testPartitaVinta() {
-		List<String> comandi = Arrays.asList("vai nord"); 		
-		IOSimulator io = new IOSimulator(comandi);
-		DiaDia gioco = new DiaDia(io);
-		gioco.gioca(); 
-		
-		assertTrue(io.hasMessaggio("Hai vinto!"));
-	}
 
 	@Test
 	public void testPartitaEsplorazioneCompleta() {

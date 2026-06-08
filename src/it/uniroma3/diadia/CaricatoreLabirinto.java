@@ -12,7 +12,7 @@ public class CaricatoreLabirinto {
     private static final String ATTREZZI   = "Attrezzi:";
     private static final String USCITE     = "Uscite:";
 
-    // Ora si usa la classe nidificata
+    // Ora si usa a classe nidificata
     private Labirinto.LabirintoBuilder builder; 
     private LineNumberReader reader;
 
